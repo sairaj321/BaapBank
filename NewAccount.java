@@ -26,7 +26,7 @@ public class NewAccount {
 			
 			if(rs.next()){
 				System.out.println("Login Successfully...");
-				Test.login();
+				Bank.login();
 			}else{
 				System.out.println("Invalid ID or Password.");
 			}
@@ -53,7 +53,7 @@ public class NewAccount {
 	            	
 	                System.out.println("Enter your Name:");
 	                name = sc.nextLine();
-	                
+	                sc.next();
 	                System.out.println("Enter your Password:");
 	                password = sc.nextLine();
 	                
@@ -93,8 +93,10 @@ public class NewAccount {
 	                System.out.println("Do you want to add another user? (1/0)");
 	                String choice = sc.nextLine();
 	                if (!choice.equals("1")) {
+	                	Bank.login();
 	                    break;
 	                }
+	                
 	            }
 	            
 	            

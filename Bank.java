@@ -10,8 +10,9 @@ public class Bank {
 			System.out.println("1: WithDraw Amount");
 			System.out.println("2: Deposit Amount");
 			System.out.println("3: Transfer the Money");
-			System.out.println("4: Personal Loan");
-			System.out.println("5: Exit");
+			System.out.println("4: Display Balance");
+			System.out.println("5: Personal Loan");
+			System.out.println("6: Exit");
 			System.out.println("Enter your choice");
 			int a=sc.nextInt();
 			
@@ -26,10 +27,13 @@ public class Bank {
 			case 3:Transfer tr=new Transfer();
 					tr.transfer();
 					break;
-			case 4:Loan lo=new Loan();
+			case 4:DisplayBalance db=new DisplayBalance();
+					db.Display();;
+					break;
+			case 5:Loan lo=new Loan();
 					lo.loan();
 					break;
-			case 5:System.exit(a);
+			case 6:System.exit(a);
 					break;
 			}
 			}

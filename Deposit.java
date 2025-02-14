@@ -10,8 +10,8 @@ public class Deposit {
 		Connection con=DbConnection.connect();
 		
 		try {
-			System.out.println("Enter the ID.");
-			int str=sc.nextInt();
+			
+			int str=NewAccount.getSc();
 			
 			System.out.println("Enter the Amount to Deposit your account ");
 			int str1=sc.nextInt();

@@ -12,8 +12,8 @@ public class Transfer {
 		Connection con=DbConnection.connect();
 		Scanner sc=new Scanner(System.in);
 		
-		System.out.println("Enter your ID:");
-		int id=sc.nextInt();
+		
+		int id=NewAccount.getSc();
 		
 		
 			try {

@@ -6,26 +6,32 @@ import java.util.Scanner;
 
 public class NewAccount {
 	Scanner sc = new Scanner(System.in);
-	Connection con = DbConnection.connect(); 
+	Connection con = DbConnection.connect();
+	static int id;
 	
+	public static int getSc() {
+		return id;
+	}
+
 	void already(){
 		
 		System.out.println("Enter your ID :");
-		int id=sc.nextInt();
+	 	 id=sc.nextInt();
 		sc.nextLine();
-//		System.out.println("Enter the Your Password :");
-//		String pass=sc.nextLine();
-		String sql="select * from users WHERE id=? ";
+		System.out.println("Enter the Your Password :");
+		String pass=sc.nextLine();
+		String sql="select * from users WHERE id=? AND password=?";
 		try {
 			PreparedStatement pst=con.prepareStatement(sql);
 			
 			pst.setInt(1, id);
-			//pst.setString(2, pass);
+			pst.setString(2, pass);
 			
 			ResultSet rs=pst.executeQuery();
 			
 			if(rs.next()){
 				System.out.println("Login Successfully...");
+				
 				Bank.login();
 			}else{
 				System.out.println("Invalid ID or Password.");
@@ -52,14 +58,14 @@ public class NewAccount {
 	                id = sc.nextInt();
 	            	
 	                System.out.println("Enter your Name:");
-	                name = sc.nextLine();
-	                sc.next();
+	                name = sc.next();
+	                
 	                System.out.println("Enter your Password:");
-	                password = sc.nextLine();
+	                password = sc.next();
 	                
 	                System.out.println("Enter your account Balance:");
 	                bal = sc.nextInt();
-	                sc.nextLine(); 
+	                
 	                
 	               
 	                String checkQuery = "SELECT COUNT(*) FROM users WHERE name = ?";
@@ -91,7 +97,7 @@ public class NewAccount {
 	                
 	            
 	                System.out.println("Do you want to add another user? (1/0)");
-	                String choice = sc.nextLine();
+	                String choice = sc.next();
 	                if (!choice.equals("1")) {
 	                	Bank.login();
 	                    break;

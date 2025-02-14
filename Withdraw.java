@@ -7,8 +7,8 @@ public class Withdraw {
 	
 	void withdraw(){
 		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter your ID :");
-		int id=sc.nextInt();
+		
+		int id=NewAccount.getSc();
 		
 		System.out.println("Enter amount to you want Withdraw :");
 		int amount=sc.nextInt();

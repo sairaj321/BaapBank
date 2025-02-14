@@ -35,19 +35,28 @@ public class Loan {
     }
 
     static void applyLoan() {
-        System.out.print("Enter User ID: ");
-        int userId = sc.nextInt();
-        sc.nextLine();
-        System.out.print("Enter Name: ");
-        String name = sc.nextLine();
-        System.out.print("Enter Loan Amount: ");
-        double amount = sc.nextDouble();
-        sc.nextLine();
-        System.out.print("Enter Proof (Aadhar, PAN, Voter): ");
-        String proof = sc.nextLine();
+//        System.out.print("Enter User ID: ");
+       int userId = NewAccount.getSc();
+       String name ="";
+       int amount =0;
+      
+        try{
+        	PreparedStatement p=con.prepareStatement("SELECT * FROM users");
+        	ResultSet rs=p.executeQuery();
+        	while(rs.next()){
+        		name=rs.getString(2);
+        		amount=rs.getInt(4);
+        	}
+        	System.out.println("you have a "+(amount*5)+" loan give want this loan (0/1)");
+        	int ch=sc.nextInt();
+        	
+        	if(ch==1){
+        		
+        	System.out.print("Enter Proof (Aadhar, PAN, Voter): ");
+            String proof = sc.next();
 
-        String sql = "INSERT INTO loans (id, name, amount, status, proof) VALUES (?, ?, ?, 'Active', ?)";
-        try (PreparedStatement pst = con.prepareStatement(sql)) {
+        	String sql = "INSERT INTO loans (id, name, amount, status, proof) VALUES (?, ?, ?, 'Active', ?)";
+        	PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, userId);
             pst.setString(2, name);
             pst.setDouble(3, amount);
@@ -58,10 +67,11 @@ public class Loan {
                 System.out.println("Loan Applied Successfully! Status: Active.");
             } else {
                 System.out.println("Loan Application Failed!");
-            }
+            }}
         } catch (SQLException e) {
             System.out.println("Error while applying for a loan: " + e.getMessage());
         }
+        
     }
 
     static void viewLoanDetails() {
@@ -78,7 +88,7 @@ public class Loan {
                 found = true;
                 System.out.println("\nLoan ID: " + rs.getInt("loan_id"));
                 System.out.println("User Name: " + rs.getString("name"));
-                System.out.println("Loan Amount: ₹" + rs.getDouble("amount"));
+                System.out.println("Loan Amount: " + rs.getDouble("amount"));
                 System.out.println("Proof: " + rs.getString("proof"));
                 System.out.println("Loan Status: " + rs.getString("status"));
             }
